@@ -1,0 +1,23 @@
+{
+  "name": "ng-notification",
+  "version": "0.2.0",
+  "peerDependencies": {
+    "@angular/common": "8.0.0",
+    "@angular/core": "8.0.0",
+    "@angular/router": "8.0.0",
+    "moment": "^2.24.0",
+    "@ng-bootstrap/ng-bootstrap": "^5.0.0-rc.0",
+    "bootstrap": "4.3.1",
+    "@ng-select/ng-select": "^2.20.0",
+    "@fortawesome/angular-fontawesome": "0.4.0",
+    "@fortawesome/fontawesome-svg-core": "1.2.19",
+    "@fortawesome/free-solid-svg-icons": "5.9.0",
+    "@ngx-translate/core": "^11.0.1",
+    "firebase": "^6.3.1",
+    "ngx-toastr": "^10.0.4",
+    "ng-utils": "0.0.2"
+  },
+  "publishConfig": {
+    "registry": "http://repository.trencadis.ro:8081/repository/npm-hosted/"
+  }
+}

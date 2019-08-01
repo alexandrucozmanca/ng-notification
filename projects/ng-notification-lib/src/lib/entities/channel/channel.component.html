@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary btn-icon btn-round"
+            [routerLink]="['/channel/new']">
+      <fa-icon [icon]="faPlus"></fa-icon>
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <div class="alert alert-warning" *ngIf="channels?.length === 0">
+      <span>No channels found</span>
+    </div>
+
+    <div class="table" *ngIf="channels?.length > 0">
+      <table class="table table-striped">
+        <thead>
+        <tr tableSort [(predicate)]="predicate" [(ascending)]="order" [callback]="transition.bind(this)">
+          <th sortBy="value" scope="col" class="th_align">Value
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th sortBy="type" scope="col" class="th_align">Type
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th scope="col" class="th_align">Action
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let channel of channels; trackBy: trackValue">
+          <td class="th_align"><a [routerLink]="['/channel', channel.value, 'view' ]">{{channel.value}}</a></td>
+          <td class="th_align">{{channel.type}}</td>
+          <td class="th_align">
+            <button type="submit"
+                    ngbTooltip="View"
+                    class="button button_view"
+                    [routerLink]="['/channel', channel.value, 'view' ]">
+              <fa-icon [icon]="faEye"></fa-icon>
+            </button>
+            <button type="submit"
+                    ngbTooltip="Delete"
+                    class="button button_delete"
+                    [routerLink]="['/', 'channel', { outlets: { popup: channel.value + '/delete'} }]"
+                    replaceUrl="true"
+                    queryParamsHandling="merge">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div [hidden]="channels?.length === 0">
+  <div class="row justify-content-center">
+    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                    [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+  </div>
+</div>
+

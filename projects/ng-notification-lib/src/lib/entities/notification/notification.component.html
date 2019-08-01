@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary btn-icon btn-round"
+            [routerLink]="['/notification/new']">
+      <fa-icon [icon]="faPlus"></fa-icon>
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <div class="alert alert-warning" *ngIf="notifications?.length === 0">
+      <span>No notifications found</span>
+    </div>
+
+    <div class="table" *ngIf=" notifications?.length> 0">
+      <table class="table table-striped">
+        <thead>
+        <tr tableSort [(predicate)]="predicate" [(ascending)]="order" [callback]="transition.bind(this)">
+          <th sortBy="id" scope="col" class="th_align">ID
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th sortBy="ts" scope="col" class="th_align">TS
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th sortBy="title" scope="col" class="th_align">Title
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th sortBy="description" scope="col" class="th_align">Description
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th sortBy="level" scope="col" class="th_align">Level
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th sortBy="icon" scope="col" class="th_align">Icon
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th scope="col" class="th_align">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let notification of notifications ;trackBy: trackId">
+          <td class="th_align"><a [routerLink]="['/notification', notification.id, 'view' ]">{{notification.id}}</a>
+          </td>
+          <td class="th_align">{{notification.ts | date:'medium'}}</td>
+          <td class="th_align">{{notification.title}}</td>
+          <td class="th_align">{{notification.description}}</td>
+          <td class="th_align">{{notification.level}}</td>
+          <td class="th_align">{{notification.icon}}</td>
+          <td class="th_align">
+
+            <button type="submit"
+                    [routerLink]="['/notification', notification.id, 'view' ]"
+                    ngbTooltip="View"
+                    class="button button_view">
+              <fa-icon [icon]="faEye"></fa-icon>
+            </button>
+            <button type="submit"
+                    [routerLink]="['/notification', notification.id, 'edit']"
+                    ngbTooltip="Edit"
+                    class="button">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <button type="submit"
+                    [routerLink]="['/', 'notification', { outlets: { popup: notification.id + '/delete'} }]"
+                    replaceUrl="true"
+                    queryParamsHandling="merge"
+                    ngbTooltip="Delete"
+                    class="button button_delete">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+            <button type="button"
+                    [routerLink]="['/', 'notification', { outlets: { popup: notification.id + '/send'} }]"
+                    replaceUrl="true"
+                    queryParamsHandling="merge"
+                    ngbTooltip="Send"
+                    class="button button_view">
+              <fa-icon [icon]="faPaperPlane"></fa-icon>
+            </button>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="notifications?.length === 0">
+  <div class="row justify-content-center">
+    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                    [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+  </div>
+</div>

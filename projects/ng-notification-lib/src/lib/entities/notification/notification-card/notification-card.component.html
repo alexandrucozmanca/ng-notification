@@ -1,0 +1,14 @@
+<div *ngIf="notifications && notifications.length>0" class="notification">
+  <div *ngFor="let notification of notifications">
+    <div>
+      <div class="pull-right btn btn-link btn-xs" (click)="removeNotification(notification)"><span>
+                <fa-icon class="trash" [icon]="faTrash"></fa-icon></span></div>
+    </div>
+    <div class="card-body">
+      <div class="col-sm-9">
+        <h6 class="tim-title center-pill">{{notification.content.notification.title}}</h6>
+        <p class="content" style="margin-bottom: 0px;">{{notification.content.notification.body}}</p>
+      </div>
+    </div>
+  </div>
+</div>

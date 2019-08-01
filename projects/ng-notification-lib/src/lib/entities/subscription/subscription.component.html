@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary btn-icon btn-round"
+            [routerLink]="['/subscription/new']">
+      <fa-icon [icon]="faPlus"></fa-icon>
+    </button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="alert alert-warning" *ngIf="subscriptions?.length === 0">
+      <span>No subscriptions found</span>
+    </div>
+    <div class="table" *ngIf="subscriptions?.length > 0">
+      <table class="table table-striped">
+        <thead>
+        <tr tableSort [(predicate)]="predicate" [(ascending)]="order" [callback]="transition.bind(this)">
+          <th sortBy="id" scope="col" class="th_align">ID
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th sortBy="role" scope="col" class="th_align">Role
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th sortBy="topics" scope="col" class="th_align">Topics
+            <fa-icon [icon]="faSort"></fa-icon>
+          </th>
+          <th scope="col" class="th_align">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let subscription of subscriptions ;trackBy: trackId">
+          <td class="th_align"><a [routerLink]="['/subscription', subscription.id, 'view' ]">{{subscription.id}}</a>
+          </td>
+          <td class="th_align">{{subscription.role}}</td>
+          <td class="th_align">
+            <span *ngFor="let topic of subscription.topics">{{topic.value}}<br></span>
+          </td>
+          <td class="th_align">
+            <button type="submit"
+                    ngbTooltip="View"
+                    class="button button_view"
+                    [routerLink]="['/subscription', subscription.id, 'view' ]">
+              <fa-icon [icon]="faEye"></fa-icon>
+            </button>
+            <button type="submit"
+                    [routerLink]="['/subscription', subscription.id, 'edit']"
+                    ngbTooltip="Edit"
+                    class="button">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <button type="submit"
+                    [routerLink]="['/', 'subscription', { outlets: { popup: subscription.id + '/delete'} }]"
+                    replaceUrl="true"
+                    queryParamsHandling="merge"
+                    ngbTooltip="Delete"
+                    class="button button_delete">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="subscriptions?.length === 0">
+  <div class="row justify-content-center">
+    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                    [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+  </div>
+</div>
+

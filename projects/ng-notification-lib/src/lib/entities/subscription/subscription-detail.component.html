@@ -1,0 +1,26 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+      <div class="card" *ngIf="subscription">
+        <div class="card-body">
+          <dl class="row-md jh-entity-details">
+            <dt><span>Role</span></dt>
+            <dd>{{subscription.role}}</dd>
+            <dt><span>Topics</span></dt>
+            <dd *ngFor="let topic of subscription.topics">&bull; {{topic.value}}<br></dd>
+          </dl>
+        </div>
+      </div>
+        <div *ngIf="subscription">
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-secondary">
+                <fa-icon [icon]="faArrowLeft"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+            <button type="button"
+                    [routerLink]="['/subscription', subscription.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="faEdit"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

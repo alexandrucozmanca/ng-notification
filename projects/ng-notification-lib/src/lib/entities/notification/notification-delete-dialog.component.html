@@ -1,0 +1,16 @@
+<form name="deleteForm" (ngSubmit)="confirmDelete(notification.id)">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm delete operation</h4>
+  </div>
+  <div class="modal-body">
+    <p ngbAutoFocus id="jhi-delete-notification-heading">Are you sure you want to delete this Notification?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary btn-link" data-dismiss="modal" (click)="clear()">
+      Cancel
+    </button>
+    <button id="jhi-confirm-delete-notification" type="submit" class="btn btn-danger btn-link">
+      Delete
+    </button>
+  </div>
+</form>

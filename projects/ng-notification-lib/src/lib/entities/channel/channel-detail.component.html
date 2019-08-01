@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div class="card" *ngIf="channel">
+      <div class="card-body">
+        <dl class="row-md jh-entity-details">
+          <dt><span>Value</span></dt>
+          <dd>
+            <span>{{channel.value}}</span>
+          </dd>
+          <dt><span>Type</span></dt>
+          <dd>
+            <span>{{channel.type}}</span>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div *ngIf="channel">
+      <button type="submit"
+              (click)="previousState()"
+              class="btn btn-secondary">
+        <fa-icon [icon]="faArrowLeft"></fa-icon>&nbsp;<span> Back</span>
+      </button>
+      <button type="button"
+              [routerLink]="['/', 'channel', { outlets: { popup: channel.value + '/delete'} }]"
+              replaceUrl="true"
+              queryParamsHandling="merge"
+              class="btn btn-danger">
+        <fa-icon [icon]="faTimes"></fa-icon>&nbsp;<span> Delete</span>
+      </button>
+    </div>
+  </div>
+</div>

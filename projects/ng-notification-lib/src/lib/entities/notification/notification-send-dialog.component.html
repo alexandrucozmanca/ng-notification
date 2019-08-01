@@ -1,0 +1,16 @@
+<form name="sendForm" (ngSubmit)="confirmSend(notification.id)">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm send operation</h4>
+  </div>
+  <div class="modal-body">
+    <p ngbAutoFocus id="jhi-send-notification-heading">Are you sure you want to send this Notification?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary btn-link" data-dismiss="modal" (click)="clear()">
+      Cancel
+    </button>
+    <button id="jhi-confirm-send-notification" type="submit" class="btn btn-danger btn-link">
+      Send
+    </button>
+  </div>
+</form>

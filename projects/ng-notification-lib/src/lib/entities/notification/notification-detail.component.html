@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div class="card" *ngIf="notification">
+      <div class="card-body">
+        <dl class="row-md jh-entity-details">
+          <dt><span>Ts</span></dt>
+          <dd>
+            <span>{{notification.ts}}</span>
+          </dd>
+          <dt><span>Title</span></dt>
+          <dd>
+            <span>{{notification.title}}</span>
+          </dd>
+          <dt><span>Description</span></dt>
+          <dd>
+            <span>{{notification.description}}</span>
+          </dd>
+          <dt><span>Icon</span></dt>
+          <dd>
+            <span>{{notification.icon}}</span>
+          </dd>
+          <dt><span>Level</span></dt>
+          <dd>
+            <span>{{notification.level}}</span>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div *ngIf="notification">
+      <button type="button"
+              [routerLink]="['/notification']"
+              class="btn btn-secondary">
+        <fa-icon [icon]="faArrowLeft">></fa-icon>&nbsp;<span> Back</span>
+      </button>
+
+      <button type="button"
+              [routerLink]="['/notification', notification.id, 'edit']"
+              class="btn btn-primary">
+        <fa-icon [icon]="faEdit"></fa-icon>&nbsp;<span> Edit</span>
+      </button>
+
+      <button type="button"
+              [routerLink]="['/', 'notification', { outlets: { popup: notification.id + '/send'} }]"
+              replaceUrl="true"
+              queryParamsHandling="merge"
+              class="btn btn-success">
+        <fa-icon [icon]="faPlane"></fa-icon>&nbsp;<span> Send</span>
+      </button>
+    </div>
+  </div>
+</div>
